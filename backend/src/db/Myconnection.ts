@@ -12,6 +12,7 @@ const connect= async()=>{
       console.log(e)
        process.exit(1)
      }
+     
 }
 
 export default connect

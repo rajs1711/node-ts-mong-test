@@ -1,8 +1,9 @@
+import {Request , Response} from 'express'
 class userController{
 
-    public static getUser(req:Request,res:Response){
+     static getUser(req:Request,res:Response){
         
-     res.json()
+     return res.status(200).json({"msg":"success"})
     }
 }
 
