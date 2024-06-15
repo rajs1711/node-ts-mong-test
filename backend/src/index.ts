@@ -2,7 +2,7 @@ import express ,{Express}from 'express'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import conectdb from './db/Myconnection'
-import userroutes from './routes/userrouter.route'
+import rootrouter from './routes/root.router'
 
 const app: Express =express()
 
@@ -11,11 +11,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
 dotenv.config({path:'./.env'})
-app.use(userroutes)
+app.use('/api/v1',rootrouter)
 
-// app.listen(process.env.PORT,()=>{
-//     console.log(`Server started on PORTS ${process.env.PORT}${process.env.CONN_URL}`)
-// })
+
 
 conectdb().then(()=>{
     app.listen(process.env.PORT,()=>{
