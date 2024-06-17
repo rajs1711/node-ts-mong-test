@@ -2,6 +2,8 @@ import { Request,Response, NextFunction } from "express"
 import vine ,{errors} from '@vinejs/vine'
 import { HTTPException } from "../exceptions/rootException"
 import { commonException } from "../exceptions/commonException"
+import pkg from "jsonwebtoken"
+const { JsonWebTokenError } = pkg;
 
 export const asynchandler=(method:Function)=>{
       return async(req: Request,res: Response,next: NextFunction)=>{
@@ -17,8 +19,10 @@ export const asynchandler=(method:Function)=>{
             }else if(error instanceof HTTPException){
                //console.log(error)
                  exception = error
+            }else if(error instanceof JsonWebTokenError){
+                exception=new HTTPException('Inavlid Token',400,'400',null)
             }else{
-               //console.log(error)
+               console.log(error)
                exception=new HTTPException('Something Went Wrong',500,'500',null)
             }
             next(exception)
