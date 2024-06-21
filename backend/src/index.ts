@@ -11,10 +11,12 @@ const app: Express =express()
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(cors())
+app.use(express.static("public"))
 
 dotenv.config({path:'./.env'})
 app.use('/api/v1',rootrouter)
 app.use(errorMiddleware)
+
 
 
 conectdb().then(()=>{
